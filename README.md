@@ -1,82 +1,88 @@
-# Tripleten web_project_around_express
+# Proyecto 16: Around the U.S. (Backend con Base de Datos)
 
-# Proyecto 15: Around the U.S. (Backend)
+Este proyecto corresponde al **Sprint 16** del curso de desarrollo web de **TripleTen**. Aquí se desarrolla una **API RESTful funcional** conectada a una base de datos **MongoDB**, utilizando **Express.js** y **Mongoose**.
 
-Este proyecto forma parte del curso de desarrollo web de TripleTen. Aquí se desarrolla la primera versión del **servidor backend** para el proyecto "Alrededor de los EE. UU.", el cual responde con datos desde archivos locales JSON simulando una API REST.
+El backend permite gestionar usuarios y tarjetas (lugares con imágenes), con validaciones, estructura modular, y manejo centralizado de errores.
 
-## Funcionalidad
+## 🔧 Funcionalidades principales
 
-- Proporciona rutas GET para obtener datos de usuarios y tarjetas.
-- Implementa manejo de errores con respuestas adecuadas.
-- Usa `fs` para leer archivos locales y `path` para asegurar rutas correctas.
-- Maneja solicitudes a rutas inexistentes con una respuesta 404.
+### Usuarios (CRUD)
+
+- `GET /users` – Obtener todos los usuarios
+- `GET /users/:userId` – Obtener un usuario por ID
+- `POST /users` – Crear un nuevo usuario
+- `PATCH /users/me` – Actualizar nombre y descripción
+- `PATCH /users/me/avatar` – Actualizar avatar
+
+### Tarjetas (CRUD)
+
+- `GET /cards` – Obtener todas las tarjetas
+- `POST /cards` – Crear una nueva tarjeta
+- `DELETE /cards/:cardId` – Eliminar una tarjeta por ID
+- `PUT /cards/:cardId/likes` – Dar "me gusta"
+- `DELETE /cards/:cardId/likes` – Quitar "me gusta"
+
+## Características técnicas
+
+- Validaciones de campos con **Mongoose**
+- Middleware temporal para simular un usuario autenticado
+- Middleware centralizado de manejo de errores (`errorHandler`)
+- Conexión a base de datos local **MongoDB**
+- Uso de **ESLint** con estilo `airbnb-base`
+- Pruebas realizadas con **Postman**
+- Estructura modular clara
 
 ## Estructura del proyecto
 
+```
 web_project_around_express/
-├── data/
-│ ├── cards.json
-│ └── users.json
+├── controllers/
+│   ├── cards.js
+│   └── users.js
+├── middlewares/
+│   └── errorHandler.js
+├── models/
+│   ├── card.js
+│   └── user.js
 ├── routes/
-│ ├── index.js
-│ ├── users.js
-│ └── cards.js
+│   ├── cards.js
+│   └── users.js
 ├── .editorconfig
 ├── .eslintrc
 ├── .gitignore
 ├── app.js
 ├── package.json
 ├── README.md
+```
 
-## 🔧 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - Node.js
 - Express.js
-- Módulo `fs` y `path`
-- ESLint con configuración `airbnb-base`
+- MongoDB
+- Mongoose
+- Postman
+- ESLint (`airbnb-base`)
 - EditorConfig
-
-## Evidencias visuales del Proyecto 15
-
-### Inicio del servidor
-
-El servidor se ejecuta correctamente con hot reload en el puerto 3000.
-![Consola - Servidor escuchando](./images/consola-servidor.png)
-
----
-
-### Pruebas de rutas con Postman
-
-#### 1. `GET /users` — Lista completa de usuarios
-
-![GET /users](./images/get-users.png)
-
-#### 2. `GET /users/:id` — Usuario por ID
-
-![GET /users/:id](./images/get-user-by-id.png)
-
-#### 3. `GET /cards` — Lista de tarjetas
-
-![GET /cards](./images/get-cards.png)
-
-#### 4. Ruta no encontrada — `/no-existe`
-
-![Ruta no encontrada](./images/error-route-not-found.png)
-
-#### 5. ID de usuario inválido — `/users/id-invalido`
-
-![ID de usuario no encontrado](./images/error-user-not-found.png)
 
 ## Cómo iniciar el servidor
 
-1. Clona el repositorio:
+1. Clona el repositorio
+
+   ```bash
    git@github.com:CaroBedoya/web_project_around_express.git
+   ```
 
-2. Instala las dependencias:
+2. Instala las dependencias
+
+   ```bash
    npm install
+   ```
 
-3. Inicia el servidor con hot reload:
+3. Inicia el servidor
+   ```bash
    npm run dev
+   ```
 
 El servidor estará disponible en:  
-[`http://localhost:3000`](http://localhost:3000)
+ [`http://localhost:3000`]
